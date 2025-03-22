@@ -1,0 +1,38 @@
+name: Git Clone, Unzip, Install, and Run
+
+on:
+  push:
+    branches:
+      - main  # Jalankan setiap ada push di branch 'main'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Clone the target repository
+    - name: Clone RepositoryName repository
+      run: |
+        git clone https://github.com/madz405/bella.git
+
+    # Step 2: Navigate into the RepositoryName directory
+    - name: Change directory to bella
+      run: cd bella
+
+    # Step 3: Unzip .zip file inside the bella folder
+    - name: Unzip Experimental-Bell-master.zip
+      run: |
+        sudo apt-get install unzip  # Install unzip tool if not already installed
+        unzip bella/Experimental-Bell-master.zip -d ./bella # Unzip Experimental-Bell-master.zip in the bella directory
+
+    # Step 4: Install npm dependencies
+    - name: Install npm dependencies
+      run: |
+        cd bella
+        npm install
+
+    # Step 5: Start the npm application
+    - name: Start the application
+      run: |
+        cd bella
+        npm start
